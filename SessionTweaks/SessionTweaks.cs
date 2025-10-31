@@ -30,9 +30,8 @@ namespace SessionTweaks
             if (Config.GetValue(Enable)) harmony.PatchAll();
         }
 
-        private static Slot FindOrDuplicateButton(string buttonName, Slot joinButton)
+        private static Slot FindOrDuplicateButton(string buttonName, Slot slotSource)
         {
-            Slot slotSource = joinButton.Parent;
             Slot newButton = slotSource.Parent.FindChild(buttonName);
             if (newButton == null)
             {
