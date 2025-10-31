@@ -30,6 +30,28 @@ namespace SessionTweaks
             if (Config.GetValue(Enable)) harmony.PatchAll();
         }
 
+        private static Slot FindOrDuplicateButton(string buttonName, Slot joinButton)
+        {
+            Slot slotSource = joinButton.Parent;
+            Slot newButton = slotSource.Parent.FindChild(buttonName);
+            if (newButton == null)
+            {
+                newButton = slotSource.Duplicate();
+                newButton.Name = buttonName;
+            }
+            return newButton;
+        }
+        private static void CopyButtonImage(Slot button, Slot sourceButton)
+        {
+            button.GetComponent<Image>().Destroy();
+            Image ImageComponent = button.AttachComponent<Image>();
+            ImageComponent.Sprite.Value = sourceButton.GetComponent<Image>().Sprite.Value;
+            ImageComponent.Tint.Value = sourceButton.GetComponent<Image>().Tint.Value;
+            ImageComponent.NineSliceSizing.Value = sourceButton.GetComponent<Image>().NineSliceSizing.Value;
+            ImageComponent.FillRect.Value = sourceButton.GetComponent<Image>().FillRect.Value;
+            ImageComponent.PreserveAspect.Value = sourceButton.GetComponent<Image>().PreserveAspect.Value;
+        }
+
         [HarmonyPatch(typeof(SessionItem))]
         [HarmonyPatch("Update")]
         class SessionTweaks_SessionItemPatch {
@@ -45,17 +67,10 @@ namespace SessionTweaks
                         /* Create Open Button */
                         if (Config.GetValue(Open)) {
 
-                            Slot DuplicatedSlot_Open = DuplicatedSlot_Src.Duplicate();
+                            Slot DuplicatedSlot_Open = FindOrDuplicateButton("Open", DuplicatedSlot_Src);
                             DuplicatedSlot_Open.GetComponent<RectTransform>().AnchorMin.Value = new float2(0.6f, 0f);
                             DuplicatedSlot_Open.GetComponent<RectTransform>().AnchorMax.Value = new float2(0.79f, 1f);
-
-                            DuplicatedSlot_Open.GetComponent<Image>().Destroy();
-                            Image ImageComponent = DuplicatedSlot_Open.AttachComponent<Image>();
-                            ImageComponent.Sprite.Value = DuplicatedSlot_Src.GetComponent<Image>().Sprite.Value;
-                            ImageComponent.Tint.Value = DuplicatedSlot_Src.GetComponent<Image>().Tint.Value;
-                            ImageComponent.NineSliceSizing.Value = DuplicatedSlot_Src.GetComponent<Image>().NineSliceSizing.Value;
-                            ImageComponent.FillRect.Value = DuplicatedSlot_Src.GetComponent<Image>().FillRect.Value;
-                            ImageComponent.PreserveAspect.Value = DuplicatedSlot_Src.GetComponent<Image>().PreserveAspect.Value;
+                            CopyButtonImage(DuplicatedSlot_Open, DuplicatedSlot_Src);
 
                             DuplicatedSlot_Open.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.Neutrals.MIDLIGHT;
                             DuplicatedSlot_Open.GetComponentInChildren<Text>().Content.Value = "Open";
@@ -80,17 +95,10 @@ namespace SessionTweaks
                         /* Create Orb Button */
                         if (Config.GetValue(Orb))
                         {
-                            Slot DuplicatedSlot = DuplicatedSlot_Src.Duplicate();
+                            Slot DuplicatedSlot = FindOrDuplicateButton("Orb", DuplicatedSlot_Src);
                             DuplicatedSlot.GetComponent<RectTransform>().AnchorMin.Value = new float2(0.4f, 0f);
                             DuplicatedSlot.GetComponent<RectTransform>().AnchorMax.Value = new float2(0.59f, 1f);
-
-                            DuplicatedSlot.GetComponent<Image>().Destroy();
-                            Image ImageComponent = DuplicatedSlot.AttachComponent<Image>();
-                            ImageComponent.Sprite.Value = DuplicatedSlot_Src.GetComponent<Image>().Sprite.Value;
-                            ImageComponent.Tint.Value = DuplicatedSlot_Src.GetComponent<Image>().Tint.Value;
-                            ImageComponent.NineSliceSizing.Value = DuplicatedSlot_Src.GetComponent<Image>().NineSliceSizing.Value;
-                            ImageComponent.FillRect.Value = DuplicatedSlot_Src.GetComponent<Image>().FillRect.Value;
-                            ImageComponent.PreserveAspect.Value = DuplicatedSlot_Src.GetComponent<Image>().PreserveAspect.Value;
+                            CopyButtonImage(DuplicatedSlot, DuplicatedSlot_Src);
 
                             DuplicatedSlot.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.Neutrals.MIDLIGHT;
                             DuplicatedSlot.GetComponentInChildren<Text>().Content.Value = "Orb";
@@ -116,17 +124,10 @@ namespace SessionTweaks
                         /* Create CopySessionURL Button */
                         if (Config.GetValue(Copy)) {
 
-                            Slot DuplicatedSlot_Copy = DuplicatedSlot_Src.Duplicate();
+                            Slot DuplicatedSlot_Copy = FindOrDuplicateButton("Copy", DuplicatedSlot_Src);
                             DuplicatedSlot_Copy.GetComponent<RectTransform>().AnchorMin.Value = new float2(0.2f, 0f);
                             DuplicatedSlot_Copy.GetComponent<RectTransform>().AnchorMax.Value = new float2(0.39f, 1f);
-
-                            DuplicatedSlot_Copy.GetComponent<Image>().Destroy();
-                            Image ImageComponent = DuplicatedSlot_Copy.AttachComponent<Image>();
-                            ImageComponent.Sprite.Value = DuplicatedSlot_Src.GetComponent<Image>().Sprite.Value;
-                            ImageComponent.Tint.Value = DuplicatedSlot_Src.GetComponent<Image>().Tint.Value;
-                            ImageComponent.NineSliceSizing.Value = DuplicatedSlot_Src.GetComponent<Image>().NineSliceSizing.Value;
-                            ImageComponent.FillRect.Value = DuplicatedSlot_Src.GetComponent<Image>().FillRect.Value;
-                            ImageComponent.PreserveAspect.Value = DuplicatedSlot_Src.GetComponent<Image>().PreserveAspect.Value;
+                            CopyButtonImage(DuplicatedSlot_Copy, DuplicatedSlot_Src);
 
                             DuplicatedSlot_Copy.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.Neutrals.MIDLIGHT;
                             DuplicatedSlot_Copy.GetComponentInChildren<Text>().Content.Value = "Copy URL";
