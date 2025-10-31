@@ -71,7 +71,7 @@ namespace SessionTweaks
                             DuplicatedSlot_Open.GetComponent<RectTransform>().AnchorMax.Value = new float2(0.79f, 1f);
                             CopyButtonImage(DuplicatedSlot_Open, DuplicatedSlot_Src);
 
-                            DuplicatedSlot_Open.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.Neutrals.MIDLIGHT;
+                            DuplicatedSlot_Open.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.TEXT_COLOR;
                             DuplicatedSlot_Open.GetComponentInChildren<Text>().Content.Value = "Open";
 
                             DuplicatedSlot_Open.GetComponent<Button>().Destroy();
@@ -99,7 +99,7 @@ namespace SessionTweaks
                             DuplicatedSlot.GetComponent<RectTransform>().AnchorMax.Value = new float2(0.59f, 1f);
                             CopyButtonImage(DuplicatedSlot, DuplicatedSlot_Src);
 
-                            DuplicatedSlot.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.Neutrals.MIDLIGHT;
+                            DuplicatedSlot.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.TEXT_COLOR;
                             DuplicatedSlot.GetComponentInChildren<Text>().Content.Value = "Orb";
 
                             DuplicatedSlot.GetComponent<Button>().Destroy();
@@ -128,7 +128,7 @@ namespace SessionTweaks
                             DuplicatedSlot_Copy.GetComponent<RectTransform>().AnchorMax.Value = new float2(0.39f, 1f);
                             CopyButtonImage(DuplicatedSlot_Copy, DuplicatedSlot_Src);
 
-                            DuplicatedSlot_Copy.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.Neutrals.MIDLIGHT;
+                            DuplicatedSlot_Copy.GetComponentInChildren<Text>().Color.Value = RadiantUI_Constants.TEXT_COLOR;
                             DuplicatedSlot_Copy.GetComponentInChildren<Text>().Content.Value = "Copy URL";
 
                             DuplicatedSlot_Copy.GetComponent<Button>().Destroy();
