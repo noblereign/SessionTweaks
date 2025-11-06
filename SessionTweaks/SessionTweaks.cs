@@ -21,7 +21,7 @@ namespace SessionTweaks
         [AutoRegisterConfigKey]
         private static readonly ModConfigurationKey<bool> Open = new("Open", "Add Open Button. This one allows to Join session without focusing.", () => true);
         [AutoRegisterConfigKey]
-        private static readonly ModConfigurationKey<bool> Copy = new("Copy", "Add Copy Button. This one allow to Copy session url for paste to external sites.", () => false);
+        private static readonly ModConfigurationKey<bool> Copy = new("Copy", "Add Copy Button. This one allows to Copy session url for paste to external sites.", () => false);
 
         private static ModConfiguration Config;
         public override void OnEngineInit() {
